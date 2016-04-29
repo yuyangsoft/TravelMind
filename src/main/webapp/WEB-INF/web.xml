@@ -7,7 +7,7 @@
 	<!-- spring begin -->
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>classpath:spring/spring-db.xml,classpath:spring/spring-biz.xml</param-value>
+        <param-value>classpath:spring/spring-db.xml,classpath:spring/spring-biz.xml,classpath:spring/spring-web.xml</param-value>
     </context-param>
     
     <listener>

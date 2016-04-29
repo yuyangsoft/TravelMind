@@ -13,4 +13,6 @@
 	
 	<aop:aspectj-autoproxy proxy-target-class="true"/>
 	
+    <task:annotation-driven /> 
+	
 </beans>

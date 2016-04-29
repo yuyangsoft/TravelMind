@@ -5,7 +5,6 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.cube.framework.annotation.Log;
 import com.cube.framework.base.BaseMapper;
 import com.cube.framework.base.BaseService;
 import com.cube.travel.db.dao.BaseUserDao;
@@ -19,11 +18,6 @@ public class BaseUserService extends BaseService<BaseUserPojo> {
 	@Autowired
 	private BaseUserDao dao;
 	
-	@Log
-	public String testAOP(String param) {
-		logger.info("testAOP() 方法体");
-		return "testAOP() 返回结果";
-	}
 
 	@Override
 	public BaseMapper<BaseUserPojo> getBaseMapper() {
