@@ -1,11 +1,11 @@
 import java.util.ArrayList;
 import java.util.List;
 
-import org.json.JSONObject;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 
 import com.cube.framework.constants.Operator;
+import com.cube.framework.utils.JSONUtils;
 import com.cube.framework.utils.WhereFilter;
 import com.cube.travel.user.service.BaseUserService;
 
@@ -33,7 +33,7 @@ public class Test {
 //		List<Map<String, Object>> list = dao.selectById(pojo);
 		List<WhereFilter> filterList = new ArrayList<WhereFilter>();
 		filterList.add(new WhereFilter("userName",Operator.LIKE_R,"test"));
-		System.out.println(service.getAll(filterList).toString());
+		System.out.println(JSONUtils.listToJson(service.getAll(filterList)).toString());
 //		System.out.println(new JSONObject(service.getByPage(filterList, 1, 5)).toString());
 //		service.testAOP("123321");
 	}
