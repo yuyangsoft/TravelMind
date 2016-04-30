@@ -13,8 +13,10 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 
 import com.cube.framework.build.dao.ColumnsDao;
+import com.cube.framework.build.dao.KeyColumnUsageDao;
 import com.cube.framework.build.dao.TablesDao;
 import com.cube.framework.build.pojo.ColumnsPojo;
+import com.cube.framework.build.pojo.KeyColumnUsagePojo;
 import com.cube.framework.build.pojo.TablesPojo;
 import com.cube.framework.constants.Operator;
 import com.cube.framework.utils.WhereFilter;
@@ -29,11 +31,11 @@ public class BuildTablePojo {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		String databaseName = "TravelMind";
-//		String pojoPath = "/Users/YuYang/work/workspace/TravelDB/src/main/java/com/cube/travel/db/pojo";
-//		String daoPaht = "/Users/YuYang/work/workspace/TravelDB/src/main/java/com/cube/travel/db/dao";
+		String pojoPath = "/Users/YuYang/work/WorkSpace/TravelMind/src/main/java/com/cube/travel/db/pojo/";
+		String daoPath = "/Users/YuYang/work/WorkSpace/TravelMind/src/main/java/com/cube/travel/db/dao/";
 		//类文件存放在哪个物理文件夹下
-		String pojoPath = "E:\\Work\\TravelMind\\src\\main\\java\\com\\cube\\travel\\db\\pojo\\";
-		String daoPath = "E:\\Work\\TravelMind\\src\\main\\java\\com\\cube\\travel\\db\\dao\\";
+//		String pojoPath = "E:\\Work\\TravelMind\\src\\main\\java\\com\\cube\\travel\\db\\pojo\\";
+//		String daoPath = "E:\\Work\\TravelMind\\src\\main\\java\\com\\cube\\travel\\db\\dao\\";
 		//类所属包路径
 		String pojoPackagePath = "com.cube.travel.db.pojo";
 		String daoPackagePath = "com.cube.travel.db.dao";
@@ -46,6 +48,7 @@ public class BuildTablePojo {
 		System.out.println("自动生成POJO和DAO 开始 ...");
 		ColumnsDao cdao = (ColumnsDao)ac.getBean("columnsDao");
 		TablesDao tdao = (TablesDao)ac.getBean("tablesDao");
+		KeyColumnUsageDao kdao = (KeyColumnUsageDao)ac.getBean("keyColumnUsageDao");
 		List<WhereFilter> filterList = new ArrayList<WhereFilter>();
 		filterList.add(new WhereFilter("tableSchema",Operator.EQ,databaseName));
 		List<Map<String, Object>> tlist = tdao.selectAll(new TablesPojo(), filterList);
@@ -74,6 +77,8 @@ public class BuildTablePojo {
 				importsb.append("import javax.persistence.Column;\n\n");
 				StringBuffer propertiessb = new StringBuffer();
 				StringBuffer getsetsb = new StringBuffer();
+				filterList.clear();
+				filterList.add(new WhereFilter("tableSchema",Operator.EQ,databaseName));
 				filterList.add(new WhereFilter("tableName",Operator.EQ,tmap.get("tableName")));
 				List<Map<String, Object>> clist = cdao.selectAll(new ColumnsPojo(), filterList);
 				String priType = null;
@@ -100,6 +105,31 @@ public class BuildTablePojo {
 						propertiessb.append("\t@Id\n");
 						priType = dataType;
 						priKey = this.columnNameToPropertyName((String)cmap.get("columnName"));
+						List<WhereFilter> kFilterList = new ArrayList<WhereFilter>();
+						kFilterList.add(new WhereFilter("referencedTableSchema",Operator.EQ,databaseName));
+						kFilterList.add(new WhereFilter("referencedTableName",Operator.EQ,tmap.get("tableName")));
+						kFilterList.add(new WhereFilter("referencedColumnName",Operator.EQ,cmap.get("columnName")));
+						List<Map<String, Object>> klist = kdao.selectAll(new KeyColumnUsagePojo(), kFilterList);
+						if(klist != null && klist.size() > 0) {
+							if(importsb.indexOf("import javax.persistence.OneToMany;") < 0) {
+								importsb.append("import javax.persistence.OneToMany;\n");
+							}
+							String rtableName = (String)klist.get(0).get("tableName");
+							propertiessb.append("\t@OneToMany(targetEntity = " + this.tableNameToClassName(rtableName) + "Pojo.class)\n");
+						}
+					} else if(cmap.get("columnKey") != null && cmap.get("columnKey").equals("MUL")) {
+						List<WhereFilter> kFilterList = new ArrayList<WhereFilter>();
+						kFilterList.add(new WhereFilter("tableSchema",Operator.EQ,databaseName));
+						kFilterList.add(new WhereFilter("tableName",Operator.EQ,tmap.get("tableName")));
+						kFilterList.add(new WhereFilter("columnName",Operator.EQ,cmap.get("columnName")));
+						List<Map<String, Object>> klist = kdao.selectAll(new KeyColumnUsagePojo(), kFilterList);
+						if(klist != null && klist.size() > 0) {
+							if(importsb.indexOf("import javax.persistence.ManyToOne;") < 0) {
+								importsb.append("import javax.persistence.ManyToOne;\n");
+							}
+							String rtableName = (String)klist.get(0).get("referencedTableName");
+							propertiessb.append("\t@ManyToOne(targetEntity = " + this.tableNameToClassName(rtableName) + "Pojo.class)\n");
+						}
 					}
 					propertiessb.append("\t@Column(name = \"" + cmap.get("columnName") + "\")\n");
 					propertiessb.append("\tprivate " + dataType + " " + this.columnNameToPropertyName((String)cmap.get("columnName")) + ";\n\n");

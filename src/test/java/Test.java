@@ -7,14 +7,14 @@ import org.springframework.context.support.FileSystemXmlApplicationContext;
 import com.cube.framework.constants.Operator;
 import com.cube.framework.utils.JSONUtils;
 import com.cube.framework.utils.WhereFilter;
-import com.cube.travel.user.service.BaseUserService;
+import com.cube.travel.user.service.UserService;
 
 public class Test {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		ApplicationContext ac = new FileSystemXmlApplicationContext(new String[]{"classpath:spring/spring-db.xml","classpath:spring/spring-biz.xml"});
-		BaseUserService service = (BaseUserService)ac.getBean("baseUserService");
+		UserService service = (UserService)ac.getBean("baseUserService");
 //		BaseUserPojo pojo = new BaseUserPojo();
 //		pojo.setUserName("test1");
 //		pojo.setUserPass("test1");

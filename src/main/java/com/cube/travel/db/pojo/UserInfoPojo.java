@@ -5,41 +5,42 @@ import javax.persistence.Table;
 import javax.persistence.Column;
 
 import java.sql.Timestamp;
+import java.sql.Timestamp;
 
 import com.cube.framework.base.BasePojo;
 
-@Table(name = "TravelMind.t_base_user")
-public class BaseUserPojo extends BasePojo {
+@Table(name = "TravelMind.T_USER_INFO")
+public class UserInfoPojo extends BasePojo {
 
 	private static final long serialVersionUID = 1L;
 
-	public BaseUserPojo() {}
-	public BaseUserPojo(Integer id) {this.id = id;}
+	public UserInfoPojo() {}
+	public UserInfoPojo(Integer id) {this.id = id;}
 
 	@Id
-	@Column(name = "id")
+	@Column(name = "ID")
 	private Integer id;
 
-	@Column(name = "user_name")
+	@Column(name = "USER_NAME")
 	private String userName;
 
-	@Column(name = "user_pass")
+	@Column(name = "USER_PASS")
 	private String userPass;
 
-	@Column(name = "user_state")
-	private Integer userState;
+	@Column(name = "USER_STATES")
+	private Integer userStates;
 
-	@Column(name = "user_from")
+	@Column(name = "USER_FROM")
 	private Integer userFrom;
 
-	@Column(name = "user_UUID")
-	private String userUuid;
-
-	@Column(name = "user_createdate")
+	@Column(name = "USER_CREATEDATE")
 	private Timestamp userCreatedate;
 
-	@Column(name = "user_type")
-	private Integer userType;
+	@Column(name = "LAST_LONGINDATE")
+	private Timestamp lastLongindate;
+
+	@Column(name = "USER_IDENTIFIER")
+	private String userIdentifier;
 
 	public void setId(Integer id) {
 		this.id = id;
@@ -62,11 +63,11 @@ public class BaseUserPojo extends BasePojo {
 		return this.userPass;
 	}
 
-	public void setUserState(Integer userState) {
-		this.userState = userState;
+	public void setUserStates(Integer userStates) {
+		this.userStates = userStates;
 	}
-	public Integer getUserState() {
-		return this.userState;
+	public Integer getUserStates() {
+		return this.userStates;
 	}
 
 	public void setUserFrom(Integer userFrom) {
@@ -76,13 +77,6 @@ public class BaseUserPojo extends BasePojo {
 		return this.userFrom;
 	}
 
-	public void setUserUuid(String userUuid) {
-		this.userUuid = userUuid;
-	}
-	public String getUserUuid() {
-		return this.userUuid;
-	}
-
 	public void setUserCreatedate(Timestamp userCreatedate) {
 		this.userCreatedate = userCreatedate;
 	}
@@ -90,11 +84,18 @@ public class BaseUserPojo extends BasePojo {
 		return this.userCreatedate;
 	}
 
-	public void setUserType(Integer userType) {
-		this.userType = userType;
+	public void setLastLongindate(Timestamp lastLongindate) {
+		this.lastLongindate = lastLongindate;
 	}
-	public Integer getUserType() {
-		return this.userType;
+	public Timestamp getLastLongindate() {
+		return this.lastLongindate;
+	}
+
+	public void setUserIdentifier(String userIdentifier) {
+		this.userIdentifier = userIdentifier;
+	}
+	public String getUserIdentifier() {
+		return this.userIdentifier;
 	}
 
 }

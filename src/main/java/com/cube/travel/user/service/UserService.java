@@ -7,26 +7,26 @@ import org.springframework.stereotype.Service;
 
 import com.cube.framework.base.BaseMapper;
 import com.cube.framework.base.BaseService;
-import com.cube.travel.db.dao.BaseUserDao;
-import com.cube.travel.db.pojo.BaseUserPojo;
+import com.cube.travel.db.dao.UserInfoDao;
+import com.cube.travel.db.pojo.UserInfoPojo;
 
 @Service
-public class BaseUserService extends BaseService<BaseUserPojo> {
+public class UserService extends BaseService<UserInfoPojo> {
 	
-	private static Logger logger = LogManager.getLogger(BaseUserService.class);
+	private static Logger logger = LogManager.getLogger(UserService.class);
 	
 	@Autowired
-	private BaseUserDao dao;
+	private UserInfoDao dao;
 	
 
 	@Override
-	public BaseMapper<BaseUserPojo> getBaseMapper() {
+	public BaseMapper<UserInfoPojo> getBaseMapper() {
 		return this.dao;
 	}
 
 	@Override
-	public BaseUserPojo getEntity(Object id) {
-		return new BaseUserPojo((Integer)id);
+	public UserInfoPojo getEntity(Object id) {
+		return new UserInfoPojo(Integer.parseInt((String)id));
 	}
 
 }
