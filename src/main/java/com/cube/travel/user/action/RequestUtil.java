@@ -13,18 +13,16 @@ import com.cube.framework.constants.Operator;
 import com.cube.framework.utils.WhereFilter;
 
 public class RequestUtil {
-	
+
 	public static List<WhereFilter> getParametersStartingWith(ServletRequest request, String prefix) {
 		Validate.notNull(request, "Request must not be null");
 		Enumeration<String> paramNames = request.getParameterNames();
-
 		List<WhereFilter> whereFilterList = new ArrayList<WhereFilter>();
 		if (prefix == null) {
 			prefix = "";
 		}
 		while (paramNames != null && paramNames.hasMoreElements()) {
 			String paramName = (String) paramNames.nextElement();
-			
 			if ("".equals(prefix) || paramName.startsWith(prefix)) {
 				String[] values = request.getParameterValues(paramName);
 				if (values == null || values.length == 0) {

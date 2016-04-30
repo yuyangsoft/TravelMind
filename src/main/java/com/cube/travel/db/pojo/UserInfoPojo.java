@@ -5,7 +5,6 @@ import javax.persistence.Table;
 import javax.persistence.Column;
 
 import java.sql.Timestamp;
-import java.sql.Timestamp;
 
 import com.cube.framework.base.BasePojo;
 
