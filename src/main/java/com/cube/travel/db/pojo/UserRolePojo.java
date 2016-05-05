@@ -7,7 +7,7 @@ import javax.persistence.Column;
 
 import com.cube.framework.base.BasePojo;
 
-@Table(name = "TravelMind.T_USER_ROLE")
+@Table(name = "realgame.t_user_role")
 public class UserRolePojo extends BasePojo {
 
 	private static final long serialVersionUID = 1L;

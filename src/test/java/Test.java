@@ -32,7 +32,7 @@ public class Test {
 //		System.out.println(result);
 //		List<Map<String, Object>> list = dao.selectById(pojo);
 		List<WhereFilter> filterList = new ArrayList<WhereFilter>();
-		filterList.add(new WhereFilter("userName",Operator.LIKE_R,"test"));
+		filterList.add(new WhereFilter("userName",Operator.likeR,"test"));
 		System.out.println(JSONUtils.listToJson(service.getAll(filterList)).toString());
 //		System.out.println(new JSONObject(service.getByPage(filterList, 1, 5)).toString());
 //		service.testAOP("123321");

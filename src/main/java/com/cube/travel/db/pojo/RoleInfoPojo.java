@@ -7,7 +7,7 @@ import javax.persistence.Column;
 
 import com.cube.framework.base.BasePojo;
 
-@Table(name = "TravelMind.T_ROLE_INFO")
+@Table(name = "realgame.t_role_info")
 public class RoleInfoPojo extends BasePojo {
 
 	private static final long serialVersionUID = 1L;
@@ -24,6 +24,9 @@ public class RoleInfoPojo extends BasePojo {
 
 	@Column(name = "ROLE_DESC")
 	private String roleDesc;
+
+	@Column(name = "ROLE_STATES")
+	private Integer roleStates;
 
 	public void setId(Integer id) {
 		this.id = id;
@@ -44,6 +47,13 @@ public class RoleInfoPojo extends BasePojo {
 	}
 	public String getRoleDesc() {
 		return this.roleDesc;
+	}
+
+	public void setRoleStates(Integer roleStates) {
+		this.roleStates = roleStates;
+	}
+	public Integer getRoleStates() {
+		return this.roleStates;
 	}
 
 }

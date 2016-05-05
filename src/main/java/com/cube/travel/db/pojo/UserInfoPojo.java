@@ -8,7 +8,7 @@ import java.sql.Timestamp;
 
 import com.cube.framework.base.BasePojo;
 
-@Table(name = "TravelMind.T_USER_INFO")
+@Table(name = "realgame.t_user_info")
 public class UserInfoPojo extends BasePojo {
 
 	private static final long serialVersionUID = 1L;
@@ -20,26 +20,32 @@ public class UserInfoPojo extends BasePojo {
 	@Column(name = "ID")
 	private Integer id;
 
-	@Column(name = "USER_NAME")
-	private String userName;
+	@Column(name = "UUID")
+	private String uuid;
 
-	@Column(name = "USER_PASS")
-	private String userPass;
+	@Column(name = "LOGIN_NAME")
+	private String loginName;
+
+	@Column(name = "LOGIN_PASS")
+	private String loginPass;
 
 	@Column(name = "USER_STATES")
 	private Integer userStates;
 
+	@Column(name = "USER_LEVEL")
+	private Integer userLevel;
+
 	@Column(name = "USER_FROM")
 	private Integer userFrom;
 
-	@Column(name = "USER_CREATEDATE")
-	private Timestamp userCreatedate;
+	@Column(name = "CREATE_DATE")
+	private Timestamp createDate;
 
-	@Column(name = "LAST_LONGINDATE")
-	private Timestamp lastLongindate;
+	@Column(name = "LAST_LOGIN_DATE")
+	private Timestamp lastLoginDate;
 
-	@Column(name = "USER_IDENTIFIER")
-	private String userIdentifier;
+	@Column(name = "USER_EXP")
+	private Long userExp;
 
 	public void setId(Integer id) {
 		this.id = id;
@@ -48,18 +54,25 @@ public class UserInfoPojo extends BasePojo {
 		return this.id;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setUuid(String uuid) {
+		this.uuid = uuid;
 	}
-	public String getUserName() {
-		return this.userName;
+	public String getUuid() {
+		return this.uuid;
 	}
 
-	public void setUserPass(String userPass) {
-		this.userPass = userPass;
+	public void setLoginName(String loginName) {
+		this.loginName = loginName;
 	}
-	public String getUserPass() {
-		return this.userPass;
+	public String getLoginName() {
+		return this.loginName;
+	}
+
+	public void setLoginPass(String loginPass) {
+		this.loginPass = loginPass;
+	}
+	public String getLoginPass() {
+		return this.loginPass;
 	}
 
 	public void setUserStates(Integer userStates) {
@@ -69,6 +82,13 @@ public class UserInfoPojo extends BasePojo {
 		return this.userStates;
 	}
 
+	public void setUserLevel(Integer userLevel) {
+		this.userLevel = userLevel;
+	}
+	public Integer getUserLevel() {
+		return this.userLevel;
+	}
+
 	public void setUserFrom(Integer userFrom) {
 		this.userFrom = userFrom;
 	}
@@ -76,25 +96,25 @@ public class UserInfoPojo extends BasePojo {
 		return this.userFrom;
 	}
 
-	public void setUserCreatedate(Timestamp userCreatedate) {
-		this.userCreatedate = userCreatedate;
+	public void setCreateDate(Timestamp createDate) {
+		this.createDate = createDate;
 	}
-	public Timestamp getUserCreatedate() {
-		return this.userCreatedate;
-	}
-
-	public void setLastLongindate(Timestamp lastLongindate) {
-		this.lastLongindate = lastLongindate;
-	}
-	public Timestamp getLastLongindate() {
-		return this.lastLongindate;
+	public Timestamp getCreateDate() {
+		return this.createDate;
 	}
 
-	public void setUserIdentifier(String userIdentifier) {
-		this.userIdentifier = userIdentifier;
+	public void setLastLoginDate(Timestamp lastLoginDate) {
+		this.lastLoginDate = lastLoginDate;
 	}
-	public String getUserIdentifier() {
-		return this.userIdentifier;
+	public Timestamp getLastLoginDate() {
+		return this.lastLoginDate;
+	}
+
+	public void setUserExp(Long userExp) {
+		this.userExp = userExp;
+	}
+	public Long getUserExp() {
+		return this.userExp;
 	}
 
 }
